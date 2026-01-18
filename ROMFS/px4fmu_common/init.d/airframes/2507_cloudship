@@ -20,6 +20,7 @@ param set-default COM_PREARM_MODE 2
 param set-default CA_AIRFRAME 9
 
 param set-default CA_ROTOR_COUNT 3
+# Front thrusters vector in X/Z (tilt around Y).
 param set-default CA_ROTOR0_AX 1
 param set-default CA_ROTOR0_AY 0
 param set-default CA_ROTOR0_AZ -1
