@@ -40,8 +40,6 @@
 
 #include "airship_att_control.hpp"
 
-#include <mathlib/math/Limits.hpp>
-
 using namespace matrix;
 
 AirshipAttitudeControl::AirshipAttitudeControl() :
@@ -105,11 +103,7 @@ void AirshipAttitudeControl::publishThrustSetpoint(const hrt_abstime &timestamp_
 
 	// zero actuators if not armed
 	if (_vehicle_status.arming_state == vehicle_status_s::ARMING_STATE_ARMED) {
-		const float throttle = math::constrain(_manual_control_setpoint.throttle, -1.f, 1.f);
-		v_thrust_sp.xyz[0] = (throttle + 1.f) * .5f;
-		// Roll stick commands lateral thrust for the tail vectoring axis.
-		v_thrust_sp.xyz[1] = math::constrain(_manual_control_setpoint.roll, -1.f, 1.f);
-		v_thrust_sp.xyz[2] = 0.f;
+		v_thrust_sp.xyz[0] = (_manual_control_setpoint.throttle + 1.f) * .5f;
 	}
 
 	_vehicle_thrust_setpoint_pub.publish(v_thrust_sp);
